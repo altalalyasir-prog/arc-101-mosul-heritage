@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="html-root" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Archiving 101 — A digital archive preserving Iraq's historical documents, photographs, and cultural artifacts." />
+  <title>Archiving 101 | أرشيف 101 | ئەرشیفی ١٠١</title>
+
+  <!-- AGDA-Style Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Readex+Pro:wght@200;300;400;600&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css?v=2" />
+</head>
+<body class="home-page-body">
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  AGDA STYLE HEADER                                             -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <header class="agda-header transparent" id="agda-header">
+    <div class="header--container">
+      
+      <!-- Brand / Logo -->
+      <a href="index.html" class="header-logo" aria-label="Archiving 101 - Home">
+        <div class="brand-text">
+          <span class="brand-name-en" lang="en">Archiving 101</span>
+          <span class="brand-name-ar" lang="ar">أرشيف 101</span>
+        </div>
+      </a>
+
+      <!-- Right Side Actions -->
+      <div class="right-side">
+        
+        <!-- Browse Archive (Moved to right) -->
+        <a href="archive.html" class="menu-link" data-en="Browse Archive" data-ar="تصفح الأرشيف" data-ku="گەڕان لە ئەرشیف">Browse Archive</a>
+        
+        <div class="vertical-separator"></div>
+
+        <!-- Theme Toggle -->
+        <div class="theme-toggle--container" id="theme-toggle-btn" aria-label="Toggle Theme">
+          <div class="theme-toggle--item light" id="theme-light-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </div>
+          <div class="theme-toggle--item dark active" id="theme-dark-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </div>
+        </div>
+
+        <!-- Language Toggle -->
+        <button class="menu-link menu-link--language" id="lang-toggle-btn" aria-label="Switch Language" data-current="en">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <span class="lang-label-en">English</span>
+          <span class="lang-label-ar" style="display:none;">العربية</span>
+          <span class="lang-label-ku" style="display:none;">کوردی</span>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  HERO SECTION                                                  -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <main class="home-page">
+    <div class="home-page--cover-container">
+      <div class="hero-gradient-overlay"></div>
+      
+      <div class="home-page--cover-content">
+        <p class="home-page--welcome" data-en="Welcome to Archiving 101" data-ar="مرحباً بكم في أرشيف 101" data-ku="بەخێربێن بۆ ئەرشیفی ١٠١">Welcome to Archiving 101</p>
+        
+        <h1 class="home-page--title" data-en="Explore primary source documents about Iraq's rich heritage" data-ar="استكشف الوثائق والمصادر الأولية حول تراث العراق الغني" data-ku="بەڵگەنامە بنەڕەتییەکان دەربارەی کەلەپووری دەوڵەمەندی عێراق بپشکنە">
+          Explore primary source documents about Iraq's rich heritage
+        </h1>
+
+        <!-- Giant Search Input -->
+        <div class="home-page--search-container">
+          <form class="home-page--search" action="archive.html" method="GET">
+            <div class="input-component--container">
+              <span class="input-component--prefix">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </span>
+              <div class="input-component">
+                <input type="text" name="q" id="home-search-input" class="with-prefix input" placeholder="Search the archive..." data-placeholder-en="Search the archive..." data-placeholder-ar="البحث في الأرشيف..." data-placeholder-ku="گەڕان لە ئەرشیفدا..." autocomplete="off" />
+              </div>
+            </div>
+            <button type="submit" class="btn--primary home-page--search-btn">
+              <span data-en="Search" data-ar="بحث" data-ku="گەڕان">Search</span>
+              <div class="btn--primary--border btn--primary--border--top"></div>
+              <div class="btn--primary--border btn--primary--border--bottom"></div>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!--  TOPICS GRID                                                   -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <section class="section-mt container">
+      <h2 class="topics--title section-title" data-en="Explore by topic" data-ar="استكشف حسب الموضوع" data-ku="گەڕان بەپێی بابەت">Explore by topic</h2>
+      
+      <div class="topics--grid">
+        <a href="archive.html?subject=architecture" class="topics--item">
+          <div class="topics--item-background" style="background-image: url('https://images.unsplash.com/photo-1600108341604-5e5898fb3cc8?q=80&w=800&auto=format&fit=crop');"></div>
+          <div class="topics--item-content">
+            <h3 data-en="Architecture" data-ar="العمارة" data-ku="تەلارسازی">Architecture</h3>
+          </div>
+        </a>
+        
+        <a href="archive.html?subject=daily-life" class="topics--item">
+          <div class="topics--item-background" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop');"></div>
+          <div class="topics--item-content">
+            <h3 data-en="Daily Life" data-ar="الحياة اليومية" data-ku="ژیانی ڕۆژانە">Daily Life</h3>
+          </div>
+        </a>
+
+        <a href="archive.html?subject=folklore" class="topics--item">
+          <div class="topics--item-background" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=800&auto=format&fit=crop');"></div>
+          <div class="topics--item-content">
+            <h3 data-en="Folklore & Traditions" data-ar="الفولكلور والتقاليد" data-ku="فۆلکلۆر و نەریتەکان">Folklore & Traditions</h3>
+          </div>
+        </a>
+
+        <a href="archive.html?subject=governance" class="topics--item">
+          <div class="topics--item-background" style="background-image: url('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800&auto=format&fit=crop');"></div>
+          <div class="topics--item-content">
+            <h3 data-en="Governance" data-ar="الحكم والإدارة" data-ku="حوکمڕانی">Governance</h3>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!--  FEATURED ARCHIVES                                             -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <section class="section-mt container" style="margin-bottom: 120px;">
+      <h2 class="topics--title section-title" data-en="Featured Records" data-ar="السجلات المميزة" data-ku="تۆمارە تایبەتەکان">Featured Records</h2>
+      
+      <div class="exhibitions-listing-wrapper">
+        <a href="archive.html" class="item item--big rect-listing">
+          <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=1200&auto=format&fit=crop" class="listing-img" alt="Erbil Citadel" />
+          <div class="overlay"></div>
+          <h3 class="title" data-en="Erbil Citadel Market and Bazaar Life" data-ar="سوق قلعة أربيل والحياة في البازار" data-ku="سوق قەڵای هەولێر و ژیانی بازاڕ">Erbil Citadel Market and Bazaar Life</h3>
+        </a>
+        
+        <a href="archive.html" class="item item--small square-listing">
+          <h3 class="title" data-en="Ottoman Administrative Decree" data-ar="مرسوم إداري عثماني" data-ku="فەرمانی کارگێڕی عوسمانی">Ottoman Administrative Decree</h3>
+          <div class="figure-container">
+            <div class="figure">
+              <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=600&auto=format&fit=crop" class="listing-img" alt="Ottoman Document" />
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  FOOTER                                                        -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <ul class="footer-ul">
+        <li><a href="#" class="footer-link" data-en="About Archiving 101" data-ar="حول أرشيف 101" data-ku="دەربارەی ئەرشیفی ١٠١">About Archiving 101</a></li>
+        <li><a href="#" class="footer-link" data-en="Terms of Use" data-ar="شروط الاستخدام" data-ku="مەرجەکانی بەکارهێنان">Terms of Use</a></li>
+        <li><a href="#" class="footer-link" data-en="Privacy Policy" data-ar="سياسة الخصوصية" data-ku="سیاسەتی تایبێتمەندی">Privacy Policy</a></li>
+        <li><a href="#" class="footer-link" data-en="Contact Us" data-ar="اتصل بنا" data-ku="پەیوەندیمان پێوە بکە">Contact Us</a></li>
+      </ul>
+      <p class="copyright" data-en="© 2026 Archiving 101. All rights reserved." data-ar="© 2026 أرشيف 101. جميع الحقوق محفوظة." data-ku="© ٢٠٢٦ ئەرشیفی ١٠١. هەموو مافەکان پارێزراون.">
+        © 2026 Archiving 101. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js?v=2"></script>
+</body>
+</html>
