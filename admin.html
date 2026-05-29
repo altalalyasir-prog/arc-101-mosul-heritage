@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Archiving 101</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Readex+Pro:wght@200;300;400;600&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #1a1a18;
+      --card-bg: #252422;
+      --border: #32312e;
+      --text: #ffffff;
+      --text-muted: #b3b2ae;
+      --primary: #d1b46a;
+      --primary-hover: #e0c885;
+      --danger: #e25c5c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 40px;
+    }
+    .dashboard {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .header h1 { font-weight: 300; font-size: 2rem; }
+    .header a { color: var(--primary); text-decoration: none; }
+    
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 32px;
+      margin-bottom: 24px;
+      border-radius: 4px;
+    }
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 24px;
+      color: var(--primary);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    input[type="text"], input[type="number"], select, textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 16px;
+      font-family: inherit;
+      border-radius: 2px;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    textarea { resize: vertical; min-height: 100px; }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 400;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .file-drop-area {
+      border: 2px dashed var(--border);
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .file-drop-area:hover { border-color: var(--primary); }
+    .file-drop-area p { color: var(--text-muted); margin-bottom: 12px; }
+    
+    #preview-container {
+      margin-top: 16px;
+      display: none;
+    }
+    #preview-img {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 4px;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: #1a1a18;
+      border: none;
+      padding: 16px 32px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: var(--primary-hover); }
+    .btn:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; }
+
+    /* RTL specific inputs */
+    .rtl-input { font-family: 'Readex Pro', sans-serif; }
+
+    #status {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 4px;
+      display: none;
+    }
+    .status-success { background: rgba(46, 204, 113, 0.1); border: 1px solid #2ecc71; color: #2ecc71; }
+    .status-error { background: rgba(231, 76, 60, 0.1); border: 1px solid #e74c3c; color: #e74c3c; }
+
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="header">
+      <h1>Admin Dashboard</h1>
+      <a href="index.html" target="_blank">View Live Website &rarr;</a>
+    </div>
+
+    <form id="upload-form">
+      <!-- Media Upload -->
+      <div class="card">
+        <h2 class="card-title">1. Upload Media</h2>
+        <div class="file-drop-area" id="drop-area">
+          <p>Drag & Drop an image here, or click to browse</p>
+          <input type="file" id="media-file" accept="image/*" style="display:none;" />
+          <button type="button" style="padding: 8px 16px; background:var(--border); color:white; border:none; cursor:pointer;" onclick="document.getElementById('media-file').click()">Select File</button>
+        </div>
+        <div id="preview-container">
+          <img id="preview-img" src="" alt="Preview" />
+          <button type="button" id="remove-img" style="display:block; margin-top:8px; color:var(--danger); background:none; border:none; cursor:pointer;">Remove Image</button>
+        </div>
+      </div>
+
+      <!-- Item Details -->
+      <div class="card">
+        <h2 class="card-title">2. Basic Details</h2>
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Title (English)</label>
+            <input type="text" id="title-en" required placeholder="e.g. The Old Market" />
+          </div>
+          <div class="form-group" dir="rtl">
+            <label>Title (Arabic)</label>
+            <input type="text" id="title-ar" class="rtl-input" required placeholder="مثال: السوق القديم" />
+          </div>
+          <div class="form-group" dir="rtl">
+            <label>Title (Kurdish)</label>
+            <input type="text" id="title-ku" class="rtl-input" required placeholder="بۆ نموونە: بازاڕی کۆن" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Date (Display)</label>
+            <input type="text" id="date" required placeholder="e.g. 1950s or 12 Oct 1954" />
+          </div>
+          <div class="form-group">
+            <label>Year (For Sorting)</label>
+            <input type="number" id="dateYear" required placeholder="e.g. 1950" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Descriptions -->
+      <div class="card">
+        <h2 class="card-title">3. Descriptions</h2>
+        <div class="form-group">
+          <label>Description (English)</label>
+          <textarea id="desc-en" required placeholder="Full description of the item..."></textarea>
+        </div>
+        <div class="form-group" dir="rtl">
+          <label>Description (Arabic)</label>
+          <textarea id="desc-ar" class="rtl-input" required placeholder="وصف كامل..."></textarea>
+        </div>
+        <div class="form-group" dir="rtl">
+          <label>Description (Kurdish)</label>
+          <textarea id="desc-ku" class="rtl-input" required placeholder="وەسفێکی تەواو..."></textarea>
+        </div>
+      </div>
+
+      <!-- Taxonomy -->
+      <div class="card">
+        <h2 class="card-title">4. Classification</h2>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Material Type</label>
+            <select id="type" required>
+              <option value="photograph">Photograph (صورة فوتوغرافية / وێنە)</option>
+              <option value="document">Document (وثيقة / بەڵگەنامە)</option>
+              <option value="audio">Audio Recording (تسجيل صوتي / تۆماری دەنگی)</option>
+              <option value="video">Video (فيديو / ڤیدیۆ)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Governorate (Location)</label>
+            <select id="location" required>
+              <option value="baghdad">Baghdad (بغداد / بەغدا)</option>
+              <option value="nineveh">Nineveh (نينوى / نەینەوا)</option>
+              <option value="basra">Basra (البصرة / بەسرە)</option>
+              <option value="erbil">Erbil (أربيل / هەولێر)</option>
+              <option value="sulaymaniyah">Sulaymaniyah (السليمانية / سلێمانی)</option>
+              <option value="duhok">Duhok (دهوك / دهۆک)</option>
+              <option value="kirkuk">Kirkuk (كركوك / کەرکوک)</option>
+              <option value="saladin">Saladin (صلاح الدين / سەڵاحەدین)</option>
+              <option value="alanbar">Al Anbar (الأنبار / ئەنبار)</option>
+              <option value="babil">Babil (بابل / بابل)</option>
+              <option value="diyala">Diyala (ديالى / دیالە)</option>
+              <option value="karbala">Karbala (كربلاء / کەربەلا)</option>
+              <option value="wasit">Wasit (واسط / واست)</option>
+              <option value="maysan">Maysan (ميسان / میسان)</option>
+              <option value="dhiqar">Dhi Qar (ذي قار / زیقار)</option>
+              <option value="najaf">Najaf (النجف / نەجەف)</option>
+              <option value="alqadisiyyah">Al-Qadisiyyah (القادسية / قادسیە)</option>
+              <option value="muthanna">Muthanna (المثنى / موسەنا)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Subjects (Select all that apply)</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox" name="subject" value="architecture" /> Architecture</label>
+            <label class="checkbox-label"><input type="checkbox" name="subject" value="infrastructure" /> Infrastructure</label>
+            <label class="checkbox-label"><input type="checkbox" name="subject" value="folklore" /> Folklore & Traditions</label>
+            <label class="checkbox-label"><input type="checkbox" name="subject" value="daily-life" /> Daily Life</label>
+            <label class="checkbox-label"><input type="checkbox" name="subject" value="governance" /> Governance</label>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn" id="submit-btn">Upload & Add to Archive</button>
+      <div id="status"></div>
+    </form>
+  </div>
+
+  <script>
+    // Constants for auto-populating labels
+    const TYPE_LABELS = {
+      'photograph': { en: 'Photograph', ar: 'صورة فوتوغرافية', ku: 'وێنە' },
+      'document': { en: 'Document', ar: 'وثيقة', ku: 'بەڵگەنامە' },
+      'audio': { en: 'Audio Recording', ar: 'تسجيل صوتي', ku: 'تۆماری دەنگی' },
+      'video': { en: 'Video', ar: 'فيديو', ku: 'ڤیدیۆ' }
+    };
+
+    const LOC_LABELS = {
+      'baghdad': { en: 'Baghdad', ar: 'بغداد', ku: 'بەغدا' },
+      'nineveh': { en: 'Nineveh', ar: 'نينوى', ku: 'نەینەوا' },
+      'basra': { en: 'Basra', ar: 'البصرة', ku: 'بەسرە' },
+      'erbil': { en: 'Erbil', ar: 'أربيل', ku: 'هەولێر' },
+      'sulaymaniyah': { en: 'Sulaymaniyah', ar: 'السليمانية', ku: 'سلێمانی' },
+      'duhok': { en: 'Duhok', ar: 'دهوك', ku: 'دهۆک' },
+      'kirkuk': { en: 'Kirkuk', ar: 'كركوك', ku: 'کەرکوک' },
+      'saladin': { en: 'Saladin', ar: 'صلاح الدين', ku: 'سەڵاحەدین' },
+      'alanbar': { en: 'Al Anbar', ar: 'الأنبار', ku: 'ئەنبار' },
+      'babil': { en: 'Babil', ar: 'بابل', ku: 'بابل' },
+      'diyala': { en: 'Diyala', ar: 'ديالى', ku: 'دیالە' },
+      'karbala': { en: 'Karbala', ar: 'كربلاء', ku: 'کەربەلا' },
+      'wasit': { en: 'Wasit', ar: 'واسط', ku: 'واست' },
+      'maysan': { en: 'Maysan', ar: 'ميسان', ku: 'میسان' },
+      'dhiqar': { en: 'Dhi Qar', ar: 'ذي قار', ku: 'زیقار' },
+      'najaf': { en: 'Najaf', ar: 'النجف', ku: 'نەجەف' },
+      'alqadisiyyah': { en: 'Al-Qadisiyyah', ar: 'القادسية', ku: 'قادسیە' },
+      'muthanna': { en: 'Muthanna', ar: 'المثنى', ku: 'موسەنا' }
+    };
+
+    // File Upload Preview Logic
+    const fileInput = document.getElementById('media-file');
+    const dropArea = document.getElementById('drop-area');
+    const previewContainer = document.getElementById('preview-container');
+    const previewImg = document.getElementById('preview-img');
+    const removeImgBtn = document.getElementById('remove-img');
+    let currentFile = null;
+
+    fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+    
+    // Drag & Drop
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
+      dropArea.addEventListener(ev, preventDefaults, false);
+    });
+    function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
+    
+    ['dragenter', 'dragover'].forEach(ev => {
+      dropArea.addEventListener(ev, () => dropArea.style.borderColor = 'var(--primary)', false);
+    });
+    ['dragleave', 'drop'].forEach(ev => {
+      dropArea.addEventListener(ev, () => dropArea.style.borderColor = 'var(--border)', false);
+    });
+    
+    dropArea.addEventListener('drop', (e) => {
+      handleFiles(e.dataTransfer.files);
+    });
+
+    function handleFiles(files) {
+      if (files.length > 0) {
+        currentFile = files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          previewImg.src = e.target.result;
+          dropArea.style.display = 'none';
+          previewContainer.style.display = 'block';
+        }
+        reader.readAsDataURL(currentFile);
+      }
+    }
+
+    removeImgBtn.addEventListener('click', () => {
+      currentFile = null;
+      fileInput.value = '';
+      dropArea.style.display = 'block';
+      previewContainer.style.display = 'none';
+    });
+
+    // Form Submission
+    const form = document.getElementById('upload-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const statusDiv = document.getElementById('status');
+
+    function showStatus(msg, isError = false) {
+      statusDiv.textContent = msg;
+      statusDiv.className = isError ? 'status-error' : 'status-success';
+      statusDiv.style.display = 'block';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Uploading...';
+      statusDiv.style.display = 'none';
+
+      try {
+        let imageUrl = '';
+        
+        // 1. Upload File if present
+        if (currentFile) {
+          const formData = new FormData();
+          formData.append('media', currentFile);
+          
+          const uploadRes = await fetch('/api/upload', {
+            method: 'POST',
+            body: formData
+          });
+          
+          if (!uploadRes.ok) throw new Error('Failed to upload image');
+          const uploadData = await uploadRes.json();
+          imageUrl = uploadData.url; // e.g. "assets/uploads/item_123.jpg"
+        }
+
+        // 2. Build Item Object
+        const locKey = document.getElementById('location').value;
+        const typeKey = document.getElementById('type').value;
+
+        // Get checked subjects
+        const subjects = Array.from(document.querySelectorAll('input[name="subject"]:checked')).map(cb => cb.value);
+
+        const descEn = document.getElementById('desc-en').value;
+        const descAr = document.getElementById('desc-ar').value;
+        const descKu = document.getElementById('desc-ku').value;
+
+        const newItem = {
+          title: {
+            en: document.getElementById('title-en').value,
+            ar: document.getElementById('title-ar').value,
+            ku: document.getElementById('title-ku').value
+          },
+          snippet: {
+            // Take first 100 characters of description as snippet
+            en: descEn.substring(0, 100) + (descEn.length > 100 ? '...' : ''),
+            ar: descAr.substring(0, 100) + (descAr.length > 100 ? '...' : ''),
+            ku: descKu.substring(0, 100) + (descKu.length > 100 ? '...' : '')
+          },
+          descriptionEn: descEn,
+          descriptionAr: descAr,
+          descriptionKu: descKu,
+          date: document.getElementById('date').value,
+          dateYear: parseInt(document.getElementById('dateYear').value, 10),
+          location: LOC_LABELS[locKey],
+          locationKey: locKey,
+          type: typeKey,
+          typeLabel: TYPE_LABELS[typeKey],
+          subjects: subjects,
+          imageUrl: imageUrl
+        };
+
+        // 3. Save to data.js via API
+        const archiveRes = await fetch('/api/archive', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newItem)
+        });
+
+        if (!archiveRes.ok) throw new Error('Failed to update data.js');
+
+        showStatus('Success! The item was added to the archive.');
+        form.reset();
+        removeImgBtn.click(); // Reset image preview
+        
+      } catch (error) {
+        showStatus(error.message, true);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Upload & Add to Archive';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="html-root" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Archiving 101 — Search the digital archive" />
+  <title>Archiving 101 | أرشيف 101 | ئەرشیفی ١٠١ - Archive Search</title>
+
+  <!-- AGDA-Style Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Readex+Pro:wght@200;300;400;600&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css?v=2" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  AGDA STYLE HEADER (Solid for Archive)                         -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <header class="agda-header" id="agda-header" style="background-color: var(--gray05); border-bottom: 1px solid var(--gray);">
+    <div class="header--container">
+      
+      <a href="index.html" class="header-logo" aria-label="Archiving 101 - Home">
+        <div class="brand-text">
+          <span class="brand-name-en" lang="en">Archiving 101</span>
+          <span class="brand-name-ar" lang="ar">أرشيف 101</span>
+        </div>
+      </a>
+
+      <!-- Right Side Actions -->
+      <div class="right-side">
+        
+        <!-- Browse Archive (Moved to right) -->
+        <a href="archive.html" class="menu-link active" data-en="Browse Archive" data-ar="تصفح الأرشيف" data-ku="گەڕان لە ئەرشیف">Browse Archive</a>
+        
+        <div class="vertical-separator"></div>
+
+        <!-- Theme Toggle -->
+        <div class="theme-toggle--container" id="theme-toggle-btn" aria-label="Toggle Theme">
+          <div class="theme-toggle--item light" id="theme-light-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </div>
+          <div class="theme-toggle--item dark active" id="theme-dark-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </div>
+        </div>
+
+        <!-- Language Toggle -->
+        <button class="menu-link menu-link--language" id="lang-toggle-btn" aria-label="Switch Language" data-current="en">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <span class="lang-label-en">English</span>
+          <span class="lang-label-ar" style="display:none;">العربية</span>
+          <span class="lang-label-ku" style="display:none;">کوردی</span>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  ARCHIVE MAIN LAYOUT                                           -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <main class="archive-layout">
+
+    <!-- ── SIDEBAR ─────────────────────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="sidebar-title" data-en="Filter Results" data-ar="تصفية النتائج" data-ku="پاڵاوتنی ئەنجامەکان">Filter Results</h2>
+      </div>
+
+      <!-- Type Filter -->
+      <div class="filter-group">
+        <div class="filter-group-header">
+          <span data-en="Material Type" data-ar="نوع المادة" data-ku="جۆری کەرەستە">Material Type</span>
+        </div>
+        <div class="filter-group-body">
+          <label class="filter-option">
+            <input type="checkbox" name="type" value="document" class="filter-checkbox" />
+            <span class="filter-label" data-en="Document" data-ar="وثيقة" data-ku="بەڵگەنامە">Document</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="type" value="photograph" class="filter-checkbox" />
+            <span class="filter-label" data-en="Photograph" data-ar="صورة فوتوغرافية" data-ku="وێنە">Photograph</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="type" value="audio" class="filter-checkbox" />
+            <span class="filter-label" data-en="Audio Recording" data-ar="تسجيل صوتي" data-ku="تۆماری دەنگی">Audio Recording</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="type" value="video" class="filter-checkbox" />
+            <span class="filter-label" data-en="Video" data-ar="فيديو" data-ku="ڤیدیۆ">Video</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Location Filter (18 Governorates of Iraq) -->
+      <div class="filter-group">
+        <div class="filter-group-header">
+          <span data-en="Governorates of Iraq" data-ar="محافظات العراق" data-ku="پارێزگاکانی عێراق">Governorates of Iraq</span>
+        </div>
+        <div class="filter-group-body">
+          <label class="filter-option"><input type="checkbox" name="location" value="baghdad" class="filter-checkbox" /><span class="filter-label" data-en="Baghdad" data-ar="بغداد" data-ku="بەغدا">Baghdad</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="nineveh" class="filter-checkbox" /><span class="filter-label" data-en="Nineveh" data-ar="نينوى" data-ku="نەینەوا">Nineveh</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="basra" class="filter-checkbox" /><span class="filter-label" data-en="Basra" data-ar="البصرة" data-ku="بەسرە">Basra</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="erbil" class="filter-checkbox" /><span class="filter-label" data-en="Erbil" data-ar="أربيل" data-ku="هەولێر">Erbil</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="sulaymaniyah" class="filter-checkbox" /><span class="filter-label" data-en="Sulaymaniyah" data-ar="السليمانية" data-ku="سلێمانی">Sulaymaniyah</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="duhok" class="filter-checkbox" /><span class="filter-label" data-en="Duhok" data-ar="دهوك" data-ku="دهۆک">Duhok</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="kirkuk" class="filter-checkbox" /><span class="filter-label" data-en="Kirkuk" data-ar="كركوك" data-ku="کەرکوک">Kirkuk</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="saladin" class="filter-checkbox" /><span class="filter-label" data-en="Saladin" data-ar="صلاح الدين" data-ku="سەڵاحەدین">Saladin</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="alanbar" class="filter-checkbox" /><span class="filter-label" data-en="Al Anbar" data-ar="الأنبار" data-ku="ئەنبار">Al Anbar</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="babil" class="filter-checkbox" /><span class="filter-label" data-en="Babil" data-ar="بابل" data-ku="بابل">Babil</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="diyala" class="filter-checkbox" /><span class="filter-label" data-en="Diyala" data-ar="ديالى" data-ku="دیالە">Diyala</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="karbala" class="filter-checkbox" /><span class="filter-label" data-en="Karbala" data-ar="كربلاء" data-ku="کەربەلا">Karbala</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="wasit" class="filter-checkbox" /><span class="filter-label" data-en="Wasit" data-ar="واسط" data-ku="واست">Wasit</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="maysan" class="filter-checkbox" /><span class="filter-label" data-en="Maysan" data-ar="ميسان" data-ku="میسان">Maysan</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="dhiqar" class="filter-checkbox" /><span class="filter-label" data-en="Dhi Qar" data-ar="ذي قار" data-ku="زیقار">Dhi Qar</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="najaf" class="filter-checkbox" /><span class="filter-label" data-en="Najaf" data-ar="النجف" data-ku="نەجەف">Najaf</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="alqadisiyyah" class="filter-checkbox" /><span class="filter-label" data-en="Al-Qadisiyyah" data-ar="القادسية" data-ku="قادسیە">Al-Qadisiyyah</span></label>
+          <label class="filter-option"><input type="checkbox" name="location" value="muthanna" class="filter-checkbox" /><span class="filter-label" data-en="Muthanna" data-ar="المثنى" data-ku="موسەنا">Muthanna</span></label>
+        </div>
+      </div>
+
+      <!-- Subject Filter -->
+      <div class="filter-group" style="border-bottom: none;">
+        <div class="filter-group-header">
+          <span data-en="Subject" data-ar="الموضوع" data-ku="بابەت">Subject</span>
+        </div>
+        <div class="filter-group-body">
+          <label class="filter-option">
+            <input type="checkbox" name="subject" value="architecture" class="filter-checkbox" />
+            <span class="filter-label" data-en="Architecture" data-ar="العمارة" data-ku="تەلارسازی">Architecture</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="subject" value="infrastructure" class="filter-checkbox" />
+            <span class="filter-label" data-en="Infrastructure" data-ar="البنية التحتية" data-ku="ژێرخانی ئابووری">Infrastructure</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="subject" value="folklore" class="filter-checkbox" />
+            <span class="filter-label" data-en="Folklore &amp; Traditions" data-ar="الفولكلور والتقاليد" data-ku="فۆلکلۆر و نەریتەکان">Folklore &amp; Traditions</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="subject" value="daily-life" class="filter-checkbox" />
+            <span class="filter-label" data-en="Daily Life" data-ar="الحياة اليومية" data-ku="ژیانی ڕۆژانە">Daily Life</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="subject" value="governance" class="filter-checkbox" />
+            <span class="filter-label" data-en="Governance &amp; Administration" data-ar="الحكم والإدارة" data-ku="حوکمڕانی">Governance &amp; Administration</span>
+          </label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── RESULTS AREA ────────────────────────────────────────── -->
+    <section class="results-area">
+      <div class="results-header">
+        <div class="results-count" id="results-count">
+          <strong id="results-count-num">0</strong> <span id="results-count-label" data-en="records found" data-ar="سجل وجد" data-ku="تۆمار دۆزرایەوە">records found</span>
+        </div>
+        
+        <select class="results-sort-select" id="results-sort">
+          <option value="relevance" data-en="Relevance" data-ar="الصلة" data-ku="پەیوەندیدارترین">Relevance</option>
+          <option value="date-asc" data-en="Date (Oldest)" data-ar="التاريخ (الأقدم)" data-ku="ڕێکەوت (کۆنترین)">Date (Oldest)</option>
+          <option value="date-desc" data-en="Date (Newest)" data-ar="التاريخ (الأحدث)" data-ku="ڕێکەوت (نوێترین)">Date (Newest)</option>
+        </select>
+      </div>
+
+      <div class="results-grid" id="results-grid">
+        <!-- Cards injected by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  MODAL DETAIL VIEW                                             -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="modal-backdrop" id="modal-backdrop" style="display:none;"></div>
+  <div class="modal-overlay" id="item-modal" style="display:none;">
+    <div class="modal-container">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      
+      <!-- Media Area -->
+      <div class="modal-media-panel">
+        <img id="modal-media-img" class="modal-media-image" src="" alt="" />
+      </div>
+
+      <!-- Metadata Area -->
+      <div class="modal-meta-panel">
+        <h2 class="modal-title" id="modal-title"></h2>
+        
+        <div class="modal-meta-fields" id="modal-meta-fields">
+          <!-- Fields injected by JS -->
+        </div>
+
+        <div class="modal-desc-text" id="modal-desc-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js?v=2"></script>
+  <script src="app.js?v=2"></script>
+</body>
+</html>
